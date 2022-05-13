@@ -2,11 +2,11 @@ from pybo import db
 
 class Tag(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    tagname = db.Column(db.String(30), unique=True, nullable=False)
+    name = db.Column(db.String(30), unique=True, nullable=False)
 
-class Foodtype(db.Model):
+class Type(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    typename = db.Column(db.String(30), unique=True, nullable=False)
+    name = db.Column(db.String(30), unique=True, nullable=False)
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -20,7 +20,9 @@ class Restaurant(db.Model):
     tag_id = db.Column(db.Integer, db.ForeignKey(
         'tag.id', ondelete='CASCADE'), nullable=False)
     type_id = db.Column(db.Integer, db.ForeignKey(
-        'foodtype.id', ondelete='CASCADE'), nullable=False)
+        'type.id', ondelete='CASCADE'), nullable=False)
+    tag = db.relationship('Tag', backref=db.backref('tag_set'))
+    type = db.relationship('Type', backref=db.backref('type_set'))
 
 class Reservation(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -30,7 +32,7 @@ class Reservation(db.Model):
         'user.id', ondelete='CASCADE'), nullable=False)
     create_date = db.Column(db.DateTime(), nullable=False)
 
-class UserLiked(db.Model):
+class Liked(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     restaurant_id = db.Column(db.Integer, db.ForeignKey(
         'restaurant.id', ondelete='CASCADE'), nullable=False)

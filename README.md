@@ -30,3 +30,4 @@ AYU - WebServiceComputing Final Project
 > installed - module
 - flask
 - flask-migrate
+- Flask-WTF
