@@ -1,5 +1,5 @@
-# personal-restaurant
-AYU - WebServiceComputing Project
+# PERSONAL - RESTAURANT
+AYU - WebServiceComputing Final Project
 
 # 1st 20220511 - 20220517
 ---
