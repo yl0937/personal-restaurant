@@ -24,3 +24,9 @@ AYU - WebServiceComputing Final Project
 - (혜연) 찜 기능
 - (예림) 예약 추가
 - (예림) 예약 삭제
+
+
+---
+> installed - module
+- flask
+- flask-migrate

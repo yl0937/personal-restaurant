@@ -13,19 +13,26 @@ naming_convention = {
     "pk" : "pk_%(table_name)s"
 }
 
-db = SQLAlchemy(metadata=MetaData(naming_convention=naming_convention))
+# db = SQLAlchemy(metadata=MetaData(naming_convention=naming_convention))
+db = SQLAlchemy()
 migrate = Migrate()
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object(config)
 
+    from . views import main_views
+    app.register_blueprint(main_views.bp)
+
     db.init_app(app)
-    if app.config['SQLALCHEMY_DATABASE_URI'].startswith("sqlite"):
-        migrate.init_app(app, db, render_as_batch=True)
-    else:
-        migrate.init_app(app, db)
+    migrate.init_app(app,db)
     from . import models
+    # from . import models
+    # if app.config['SQLALCHEMY_DATABASE_URI'].startswith("sqlite"):
+    #     migrate.init_app(app, db, render_as_batch=True)
+    # else:
+    #     migrate.init_app(app, db)
+    # from . import models
 
 
 
