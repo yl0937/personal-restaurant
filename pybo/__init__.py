@@ -21,8 +21,9 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(config)
 
-    from . views import main_views
+    from . views import main_views, restaurant_views
     app.register_blueprint(main_views.bp)
+    app.register_blueprint(restaurant_views.bp)
 
     db.init_app(app)
     migrate.init_app(app,db)

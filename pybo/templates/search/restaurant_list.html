@@ -1,0 +1,10 @@
+{% if restaurant_list %}
+    <ul>
+        {% for restaurant in restaurant_list %}
+        <li><a href="{{ url_for('restaurant.detail',restaurant_id=restaurant.id)}}">{{restaurant.restaurant}}</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>질문이 없습니다.</p>
+        </tr>
+{% endif %}
