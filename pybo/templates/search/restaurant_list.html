@@ -6,7 +6,7 @@
             <div class="input-group">
                 <input type="text" id="search_kw" class="form-control" value="{{ kw or '' }}">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" id="btn_search">찾기</button>
+                    <button class="btn btn-primary" type="button" id="btn_search">찾기</button>
                 </div>
             </div>
         </div>
@@ -17,6 +17,8 @@
                 <th>레스토랑 이름</th>
                 <th>주소</th>
                 <th>태그</th>
+                <th>종류</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -24,13 +26,19 @@
         {% for restaurant in restaurant_list %}
         <tr>
             <td>
-                <a href="{{ url_for('restaurant.detail',restaurant_id=restaurant.id)}}">{{ restaurant.restaurant }}</a>
+                <a>{{ restaurant.restaurant }}</a>
             </td>
             <td>
                 <a>{{ restaurant.address }}</a>
             </td>
             <td>
                 <a>{{ restaurant.tag.name }}</a>
+            </td>
+            <td>
+                <a>{{ restaurant.type.name }}</a>
+            </td>
+            <td>
+                <a href="{{ url_for('restaurant.detail',restaurant_id=restaurant.id)}}"><button button class="btn btn-primary" type="button">예약하기</button></a>
             </td>
         </tr>
         {% endfor %}

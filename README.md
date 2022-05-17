@@ -7,7 +7,7 @@ AYU - WebServiceComputing Final Project
 - (혜연) 회원가입
 - (혜연) 로그인/로그아웃
 - (예림) ~~레스토랑 검색~~
-- (예림) ~~태그 검색~~
+- (예림) 태그 검색
 
 # 2st 20220518 - 20220524
 ---
@@ -16,6 +16,7 @@ AYU - WebServiceComputing Final Project
 - (혜연) 태그 추가
 - (예림) 거리 검색
 - (예림) 푸드 타입 검색
+
 
 # 3st 20220525 - 20220531
 ---
@@ -27,7 +28,7 @@ AYU - WebServiceComputing Final Project
 
 
 ---
-> installed - module
-- flask
-- flask-migrate
-- Flask-WTF
+> installed - modules
+> - flask
+> - flask-migrate
+> - Flask-WTF

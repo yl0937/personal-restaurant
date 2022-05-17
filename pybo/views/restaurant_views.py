@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template,request
 from pybo import db
 
-from pybo.models import Restaurant, Tag
+from pybo.models import Restaurant, Tag, Type
 
 bp = Blueprint('restaurant',__name__,url_prefix='/restaurant')
 
@@ -12,10 +12,11 @@ def _list():
     if kw:
         search = '%%{}%%'.format(kw)
         restaurant_list = Restaurant.query.filter(Restaurant.restaurant.ilike(search) |
-                                                  Tag.name.ilike(search)
+                                                  Tag.name.ilike(search) |
+                                                  Type.name.ilike(search)
                                                   )\
             .distinct()
-    return render_template('search/restaurant_list.html', restaurant_list=restaurant_list, kw=kw)
+    return render_template('search/restaurant_list.html', restaurant_list=restaurant_list,kw=kw)
 
 
 
