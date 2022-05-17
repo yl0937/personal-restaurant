@@ -3,13 +3,6 @@ from wtforms import StringField, TextAreaField, PasswordField
 from wtforms.fields import EmailField
 from wtforms.validators import DataRequired, Length, EqualTo, Email
 
-class QuestionForm(FlaskForm):
-    subject = StringField('제목', validators=[DataRequired('제목이 없다.')])
-    content = TextAreaField('내용', validators=[DataRequired('내용이 없다.')])
-
-class AnswerForm(FlaskForm):
-    content = TextAreaField('내용', validators=[DataRequired('내용이 없다.')])
-
 class UserCreateForm(FlaskForm):
     username = StringField('사용자이름',validators=[
         DataRequired(), Length(min=3,max=25)])

@@ -2,51 +2,52 @@
 {% block content %}
 <div class="container my-3">
      <div class="row my-3">
-        <div class="col-6">
-            <div class="input-group">
-                <input type="text" id="search_kw" class="form-control" value="{{ kw or '' }}">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" id="btn_search">찾기</button>
-                </div>
-            </div>
-        </div>
+<!--        <div class="col-6">-->
+<!--            <div class="input-group">-->
+<!--                <input type="text" id="search_kw" class="form-control" value="{{ kw or '' }}">-->
+<!--                <div class="input-group-append">-->
+<!--                    <button class="btn btn-outline-secondary" type="button" id="btn_search">찾기</button>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+        <table class="table">
+            <thead>
+                <tr class="thead-dark">
+                    <th>
+                    <input type="search" id="site-search" style="width:70%" name="q">
+                    <button>Search</button>
+                    </th>
+                </tr>
+                <tr class="thead-dark">
+                    <th>레스토랑 이름</th>
+                    <th>주소</th>
+                    <th>태그</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% if restaurant_list %}
+            {% for restaurant in restaurant_list %}
+            <tr>
+                <td>
+                    <a href="{{ url_for('restaurant.detail',restaurant_id=restaurant.id)}}">{{ restaurant.restaurant }}</a>
+                </td>
+                <td>
+                    <a>{{ restaurant.address }}</a>
+                </td>
+                <td>
+                    <a>{{ restaurant.tag.name }}</a>
+                </td>
+            </tr>
+            {% endfor %}
+            {% else %}
+            <tr>
+                <td colspan="3">질문이 없습니다.</td>
+            </tr>
+            {% endif %}
+            </tbody>
+        </table>
     </div>
-    <table class="table">
-        <thead>
-            <tr class="thead-dark">
-                <th>
-                <input type="search" id="site-search" style="width:70%" name="q">
-                <button>Search</button>
-                </th>
-            </tr>
-            <tr class="thead-dark">
-                <th>레스토랑 이름</th>
-                <th>주소</th>
-                <th>태그</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% if restaurant_list %}
-        {% for restaurant in restaurant_list %}
-        <tr>
-            <td>
-                <a href="{{ url_for('restaurant.detail',restaurant_id=restaurant.id)}}">{{ restaurant.restaurant }}</a>
-            </td>
-            <td>
-                <a>{{ restaurant.address }}</a>
-            </td>
-            <td>
-                <a>{{ restaurant.tag.name }}</a>
-            </td>
-        </tr>
-        {% endfor %}
-        {% else %}
-        <tr>
-            <td colspan="3">질문이 없습니다.</td>
-        </tr>
-        {% endif %}
-        </tbody>
-    </table>
 </div>
 <form id="searchForm" method="get" action="{{ url_for('restaurant._list') }}">
     <input type="hidden" id="kw" name="kw" value="{{ kw or '' }}">
