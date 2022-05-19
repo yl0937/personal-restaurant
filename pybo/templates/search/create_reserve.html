@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container my-3">
+    <form method="post" class="post-form">
+        {{ form.csrf_token }}
+        {% include "form_errors.html" %}
+        <div class="form-group">
+            <label for="name">식당 이름</label>
+            <input type="text" class="form-control" name="name" id="name"
+                  readonly placeholder="{{ restaurant.restaurant}}">
+        </div>
+        <div class="form-group">
+            <label for="username">사용자 이름</label>
+            <input type="text" class="form-control" name="username" id="username"
+                   readonly placeholder="{{ g.user.username }}">
+        </div>
+        <div class="form-group">
+            <label for="usernum">전화번호</label>
+            <input type="usernum" class="form-control" name="usernum" id="usernum"
+                    value="{{ form.usernum.data or '' }}">
+        </div>
+        <div class="form-group">
+            <label for="peoplenum">예약인원</label>
+            <input type="number" name="peoplenum" min="1" id="peoplenum" value="{{ form.peoplenum.data or '' }}">
+            <label for="create_date">예약시간</label>
+            <input type="text" name="create_date" id="create_date" readonly placeholder="현재">
+        </div>
+        <button type="submit" class="btn btn-primary">생성하기</button>
+    </form>
+</div>
+{% endblock %}

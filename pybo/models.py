@@ -29,11 +29,14 @@ class Reservation(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     restaurant_id = db.Column(db.Integer, db.ForeignKey(
         'restaurant.id', ondelete='CASCADE'), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey(
-        'user.id', ondelete='CASCADE'), nullable=False)
+    user_name =  db.Column(db.String(15),db.ForeignKey(
+        'user.username', ondelete='CASCADE'), nullable=False)
+    user_num = db.Column(db.String(15), nullable=False)
+    peoplenum = db.Column(db.Integer,nullable=True, server_default='1')
     create_date = db.Column(db.DateTime(), nullable=False)
     restaurant = db.relationship('Restaurant',backref=db.backref('restaurant_set'))
     user = db.relationship('User',backref=db.backref('user_set'))
+
 
 # class Liked(db.Model):
 #     id = db.Column(db.Integer, primary_key=True)
