@@ -32,3 +32,4 @@ AYU - WebServiceComputing Final Project
 > - flask
 > - flask-migrate
 > - Flask-WTF
+>  - email_validator
