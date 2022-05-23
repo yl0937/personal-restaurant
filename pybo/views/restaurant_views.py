@@ -10,6 +10,7 @@ from pybo.models import Restaurant, Tag, Type
 
 bp = Blueprint('restaurant',__name__,url_prefix='/restaurant')
 
+
 @bp.route('/list/')
 def _list():
     page = request.args.get('page', type=int, default=1)  # 페이지
