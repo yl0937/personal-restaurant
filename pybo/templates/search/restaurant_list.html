@@ -40,8 +40,11 @@
                     <a>{{ restaurant.type.name }}</a>
                 </td>
                 <td>
+                    {% if not g.user %}
+                    {% else %}
                     <a href="{{ url_for('restaurant.detail',restaurant_id=restaurant.id)}}"><button button class="btn btn-primary" type="button">예약하기</button></a>
                     <a href="{{ url_for('restaurant.detail',restaurant_id=restaurant.id)}}"><button button class="btn btn-primary" type="button">찜</button></a>
+                    {% endif %}
                 </td>
             </tr>
             {% endfor %}

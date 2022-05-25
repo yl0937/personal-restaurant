@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template,request,redirect,url_for,flash, g
 from pybo import db
-from pybo.models import User,Reservation
+from pybo.models import User,Reservation, Liked
 from pybo.forms import ReservationForm
 from datetime import datetime
 from pybo.views.auth_views import login_required
