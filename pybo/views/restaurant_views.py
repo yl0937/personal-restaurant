@@ -10,6 +10,9 @@ from pybo.models import Restaurant, Tag, Type
 
 bp = Blueprint('restaurant',__name__,url_prefix='/restaurant')
 
+@bp.route('/')
+def _home():
+    return render_template('main.html')
 
 @bp.route('/list/')
 def _list():
