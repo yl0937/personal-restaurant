@@ -43,7 +43,7 @@ def detail(restaurant_id):
             reserve = Reservation(restaurant_id=restaurant_id,
                                   user_name=user,
                                   user_num = form.usernum.data,
-                                  create_date = datetime.now(),
+                                  create_date = form.create_date.data,
                                   peoplenum = form.peoplenum.data)
             db.session.add(reserve)
             db.session.commit()

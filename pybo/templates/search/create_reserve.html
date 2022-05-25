@@ -23,7 +23,7 @@
             <label for="peoplenum">예약인원</label>
             <input type="number" name="peoplenum" min="1" id="peoplenum" value="{{ form.peoplenum.data or '' }}">
             <label for="create_date">예약시간</label>
-            <input type="text" name="create_date" id="create_date" readonly placeholder="현재">
+            <input type="datetime-local" name="create_date" id="create_date" value="{{ form.create_date.data or '' }}">
         </div>
         <button type="submit" class="btn btn-primary">생성하기</button>
     </form>

@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, PasswordField, IntegerField, DateTimeField
+from wtforms import StringField, TextAreaField, PasswordField, IntegerField, DateTimeField, DateTimeLocalField
 from wtforms.fields import EmailField
 from wtforms.validators import DataRequired, Length, EqualTo, Email
 
@@ -20,5 +20,5 @@ class ReservationForm(FlaskForm):
         DataRequired(), Length(min=3,max=25)])
     peoplenum = IntegerField('예약인원',validators=[
         DataRequired()])
-    # create_date = DateTimeField('예약시간',validators=[
-    #     DataRequired(), Length(min=3,max=25)])
+    create_date = DateTimeField('예약시간',validators=[
+        DataRequired()])
