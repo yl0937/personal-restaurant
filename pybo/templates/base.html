@@ -5,8 +5,24 @@
     <meta name="viewpoint" content="width-device-width, initial-scale=1,shrink-to-fit=no">
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gugi&family=Noto+Sans+KR&display=swap" rel="stylesheet">
     <title>Personal Restaurant</title>
 
+    <style>
+        *{
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        .navbar-brand{
+            font-family: 'Gugi', cursive;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+    </style>
 </head>
 <body>
 {% include "navbar.html" %}
