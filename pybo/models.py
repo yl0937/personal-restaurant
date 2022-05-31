@@ -10,7 +10,9 @@ class Type(db.Model):
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(15),unique=True,nullable=False)
+    userbirth = db.Column(db.String(200),nullable=False)
+    username = db.Column(db.String(15),nullable=False)
+    userid = db.Column(db.String(15), unique=True, nullable=False)
     password = db.Column(db.String(200),nullable=False)
     email = db.Column(db.String(200),nullable=False)
 
@@ -29,8 +31,8 @@ class Reservation(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     restaurant_id = db.Column(db.Integer, db.ForeignKey(
         'restaurant.id', ondelete='CASCADE'), nullable=False)
-    user_name =  db.Column(db.String(15),db.ForeignKey(
-        'user.username', ondelete='CASCADE'), nullable=False)
+    user_name = db.Column(db.String(15),db.ForeignKey(
+        'user.userid', ondelete='CASCADE'), nullable=False)
     user_num = db.Column(db.String(15), nullable=False)
     peoplenum = db.Column(db.Integer,nullable=True, server_default='1')
     create_date = db.Column(db.DateTime(), nullable=False)
@@ -42,5 +44,5 @@ class Liked(db.Model):
     restaurant_name = db.Column(db.Integer, db.ForeignKey(
         'restaurant.restaurant', ondelete='CASCADE'), nullable=False)
     user_name = db.Column(db.Integer, db.ForeignKey(
-        'user.username', ondelete='CASCADE'), nullable=False)
+        'user.userid', ondelete='CASCADE'), nullable=False)
     create_date = db.Column(db.DateTime(), nullable=False)

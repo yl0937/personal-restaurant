@@ -35,8 +35,8 @@ def detail(restaurant_id):
     form = ReservationForm()
     restaurant = Restaurant.query.get_or_404(restaurant_id)
     if request.method == 'POST' and form.validate_on_submit():
-        user = g.user.username
-        # user = User.query.filter_by(username=form.username.data).first()
+        user = g.user.userid
+        # user = User.query.filter_by(userid=form.userid.data).first()
         if not user:
             flash('존재하지 않는 사용자 입니다.')
         else:

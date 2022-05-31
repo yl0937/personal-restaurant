@@ -13,7 +13,7 @@ bp = Blueprint('reservation',__name__,url_prefix='/reservation')
 @bp.route('/list/')
 @login_required
 def _list():
-    user = g.user.username
+    user = g.user.userid
     page = request.args.get('page', type=int, default=1)  # 페이지
     restaurant_list = Reservation.query.filter(Reservation.user_name.ilike(user))
     restaurant_list = restaurant_list.paginate(page, per_page=10)
