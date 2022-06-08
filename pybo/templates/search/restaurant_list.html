@@ -144,8 +144,7 @@ Array.from(delete_liked_elements).forEach(function(element) {
 });
 
 function showPopup() {
-    window.open("popup.html","a","width=400, height=300, left=100, top=50");
-    alert("fjsidf");
+    window.open("{{ url_for('restaurant._popup') }}","a","width=400, height=300, left=100, top=50");
 }
 </script>
 {% endblock %}
