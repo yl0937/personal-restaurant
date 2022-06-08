@@ -41,8 +41,11 @@ class Reservation(db.Model):
 
 class Liked(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    restaurant_name = db.Column(db.Integer, db.ForeignKey(
+    restaurant_name = db.Column(db.String(30), db.ForeignKey(
         'restaurant.restaurant', ondelete='CASCADE'), nullable=False)
+    address = db.Column(db.String(50),nullable=False)
+    tag_name = db.Column(db.String(30), nullable=False)
+    type_name = db.Column(db.String(30), nullable=False)
     user_name = db.Column(db.Integer, db.ForeignKey(
-        'user.userid', ondelete='CASCADE'), nullable=False)
+        'user.username', ondelete='CASCADE'), nullable=False)
     create_date = db.Column(db.DateTime(), nullable=False)

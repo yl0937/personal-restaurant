@@ -40,7 +40,8 @@
                     <a>{{ restaurant.create_date }}</a>
                 </td>
                 <td>
-                    <a><button button class="btn btn-primary" type="button">예약 취소</button></a>
+                    <a href="javascript:void(0)" class="delete btn btn-sm btn-outline-secondary"
+                    data-uri="{{ url_for('reservation.delete', reservation_id=restaurant.id) }}">예약취소</a>
                 </td>
             </tr>
             {% endfor %}
@@ -109,6 +110,15 @@
     btn_search.addEventListener('click', function() {
         document.getElementById('kw').value = document.getElementById('search_kw').value;
         document.getElementById('searchForm').submit();
+    });
+
+    const delete_elements = document.getElementsByClassName("delete");
+    Array.from(delete_elements).forEach(function(element) {
+        element.addEventListener('click', function() {
+            if(confirm("정말로 삭제하시겠습니까?")) {
+                location.href = this.dataset.uri;
+            };
+        });
     });
     </script>
     {% endblock %}

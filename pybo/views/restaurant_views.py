@@ -50,4 +50,21 @@ def detail(restaurant_id):
             return redirect(url_for('main.index'))
     return render_template('search/create_reserve.html',restaurant=restaurant,form=form)
 
+@bp.route('/liked/<int:restaurant_id>/', methods=('GET', 'POST'))
+@login_required
+def like(restaurant_id):
+    restaurant = Restaurant.query.get(restaurant_id)
+    user = g.user.username
+    if not user:
+        flash('존재하지 않는 사용자 입니다.')
+    else:
+        liked = Liked(restaurant_name=restaurant.restaurant,
+                      address = restaurant.address,
+                      tag_name = restaurant.tag.name,
+                      type_name = restaurant.type.name,
+                      user_name=user,
+                      create_date = datetime.now())
+        db.session.add(liked)
+        db.session.commit()
+    return redirect(url_for('main.index',restaurant=restaurant))
 
