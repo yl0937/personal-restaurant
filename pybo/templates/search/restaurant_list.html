@@ -7,14 +7,14 @@
     </div>
         <table class="table">
             <thead>
-                <tr>
-                <div class="input-group">
-                    <input type="text" id="search_kw" class="form-control" value="{{ kw or '' }}" placeholder="식당,태그,종류 등을 검색하세요!">
-                    <div class="input-group-append">
-                        <button class="btn btn btn-primary" type="button" id="btn_search" href="#">찾기</button>
-                    </div>
-                </div>
-                </tr>
+<!--                <tr>-->
+<!--                <div class="input-group">-->
+<!--                    <input type="text" id="search_kw" class="form-control" value="{{ kw or '' }}" placeholder="식당,태그,종류 등을 검색하세요!">-->
+<!--                    <div class="input-group-append">-->
+<!--                        <button class="btn btn btn-primary" type="button" id="btn_search" href="#">찾기</button>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                </tr>-->
                 <tr class="thead-dark">
                     <th>레스토랑</th>
                     <th>주소</th>
@@ -142,6 +142,11 @@ Array.from(delete_liked_elements).forEach(function(element) {
         };
     });
 });
+
+function showPopup() {
+    window.open("popup.html","a","width=400, height=300, left=100, top=50");
+    alert("fjsidf");
+}
 </script>
 {% endblock %}
 
