@@ -1,114 +1,102 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="container my-3">
-     <div class="row my-3">
-        <div class="col-6">
-        </div>
-    </div>
-        <table class="table">
-            <thead>
+    <div class="container my-5">
+         <table class="table my-5">
+                <thead>
+                    <tr class="thead-dark text-center">
+                        <th>레스토랑</th>
+                        <th>주소</th>
+                        <th>태그</th>
+                        <th>종류</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% if liked_list %}
+                {% for liked in liked_list.items %}
                 <tr>
-                <div class="input-group">
-                    <input type="text" id="search_kw" class="form-control" value="{{ kw or '' }}" placeholder="식당,태그,종류 등을 검색하세요!">
-                    <div class="input-group-append">
-                        <button class="btn btn btn-primary" type="button" id="btn_search" href="#">찾기</button>
-                    </div>
-                </div>
+                    <td>
+                        <a>{{ liked.restaurant_name }}</a>
+                    </td>
+                    <td>
+                        <a>{{ liked.address }}</a>
+                    </td>
+                    <td>
+                        <a>{{ liked.tag_name }}</a>
+                    </td>
+                    <td>
+                        <a>{{ liked.type_name }}</a>
+                    </td>
                 </tr>
-                <tr class="thead-dark">
-                    <th>레스토랑</th>
-                    <th>주소</th>
-                    <th>태그</th>
-                    <th>종류</th>
-                    <th></th>
+                {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="3">정보가 없습니다.</td>
                 </tr>
-            </thead>
-            <tbody>
-            {% if liked_list %}
-            {% for liked in liked_list.items %}
-            <tr>
-                <td>
-                    <a>{{ liked.restaurant_name }}</a>
-                </td>
-                <td>
-                    <a>{{ liked.address }}</a>
-                </td>
-                <td>
-                    <a>{{ liked.tag_name }}</a>
-                </td>
-                <td>
-                    <a>{{ liked.type_name }}</a>
-                </td>
-            </tr>
-            {% endfor %}
+                {% endif %}
+                </tbody>
+            </table>
+          <!-- 페이징처리 시작 -->
+        <ul class="pagination justify-content-center">
+            <!-- 이전페이지 -->
+            {% if liked_list.has_prev %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ liked_list.prev_num }}">이전</a>
+            </li>
             {% else %}
-            <tr>
-                <td colspan="3">정보가 없습니다.</td>
-            </tr>
+            <li class="page-item disabled">
+                <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+            </li>
             {% endif %}
-            </tbody>
+            {% for page_num in liked_list.iter_pages() %}
+                {% if page_num %}
+                    {% if page_num != liked_list.page %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+            </li>
+            {% else %}
+            <li class="page-item active" aria-current="page">
+                <a class="page-link" href="#">{{ page_num }}</a>
+            </li>
+            {% endif %}
+            {% else %}
+            <li class="disabled">
+                <a class="page-link" href="#">...</a>
+            </li>
+            {% endif %}
+            {% endfor %}
+            <!-- 다음페이지 -->
+            {% if liked_list.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ liked_list.next_num }}">다음</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+            </li>
+            {% endif %}
+        </ul>
+        <!-- 페이징처리 끝 -->
         </table>
-      <!-- 페이징처리 시작 -->
-    <ul class="pagination justify-content-center">
-        <!-- 이전페이지 -->
-        {% if liked_list.has_prev %}
-        <li class="page-item">
-            <a class="page-link" href="?page={{ liked_list.prev_num }}">이전</a>
-        </li>
-        {% else %}
-        <li class="page-item disabled">
-            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
-        </li>
-        {% endif %}
-        {% for page_num in liked_list.iter_pages() %}
-            {% if page_num %}
-                {% if page_num != liked_list.page %}
-        <li class="page-item">
-            <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
-        </li>
-        {% else %}
-        <li class="page-item active" aria-current="page">
-            <a class="page-link" href="#">{{ page_num }}</a>
-        </li>
-        {% endif %}
-        {% else %}
-        <li class="disabled">
-            <a class="page-link" href="#">...</a>
-        </li>
-        {% endif %}
-        {% endfor %}
-        <!-- 다음페이지 -->
-        {% if liked_list.has_next %}
-        <li class="page-item">
-            <a class="page-link" href="?page={{ liked_list.next_num }}">다음</a>
-        </li>
-        {% else %}
-        <li class="page-item disabled">
-            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
-        </li>
-        {% endif %}
-    </ul>
-    <!-- 페이징처리 끝 -->
     </div>
-</div>
-<form id="searchForm" method="get" action="{{ url_for('restaurant._list') }}">
-    <input type="hidden" id="kw" name="kw" value="{{ kw or '' }}">
-</form>
-<script type='text/javascript'>
-const page_elements = document.getElementsByClassName("page-link");
-Array.from(page_elements).forEach(function(element) {
-    element.addEventListener('click', function() {
-        document.getElementById('page').value = this.dataset.page;
+    <form id="searchForm" method="get" action="{{ url_for('restaurant._list') }}">
+        <input type="hidden" id="kw" name="kw" value="{{ kw or '' }}">
+    </form>
+    <script type='text/javascript'>
+    const page_elements = document.getElementsByClassName("page-link");
+    Array.from(page_elements).forEach(function(element) {
+        element.addEventListener('click', function() {
+            document.getElementById('page').value = this.dataset.page;
+            document.getElementById('searchForm').submit();
+        });
+    });
+    const btn_search = document.getElementById("btn_search");
+    btn_search.addEventListener('click', function() {
+        document.getElementById('kw').value = document.getElementById('search_kw').value;
         document.getElementById('searchForm').submit();
     });
-});
-const btn_search = document.getElementById("btn_search");
-btn_search.addEventListener('click', function() {
-    document.getElementById('kw').value = document.getElementById('search_kw').value;
-    document.getElementById('searchForm').submit();
-});
-</script>
-{% endblock %}
+    </script>
+    {% endblock %}
 
 
 

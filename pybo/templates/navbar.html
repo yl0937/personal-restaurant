@@ -11,7 +11,16 @@
                     </li>
                 </ul>
             </div>
-
+                <div class="input-group" style="width: 50%;" role="search">
+                    <input type="text" id="search_kw" class="form-control" value="{{ kw or '' }}" placeholder="식당, 태그, 종류 등을 검색하세요!">
+                    <div class="input-group-append" >
+                        <a href="{{ url_for('restaurant._list') }}">
+                            <button class="btn btn btn-primary" type="button" style="background-color: white; border: 0" id="btn_search">
+                                <span style="color: #f7323f;">찾기</span>
+                            </button>
+                        </a>
+                    </div>
+                </div>
             <button class="navbar-toggler" type="button"
                     data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent"
@@ -22,13 +31,10 @@
             </button>
             <div class="collapse navbar-collapse d-flex flex-wrap justify-content-end" id="navbarSupportedContent">
                 {% if g.user %}
-                <ul class="navbar-nav">
+                <ul class="navbar-nav mb-lg-0 dflex justify-content-end">
                     <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url_for('auth.logout') }}">{{ g.user.userid }} (로그아웃)</a>
                     </li>
-                </ul>
-
-                <ul class="navbar-nav mb-lg-0 dflex justify-content-end">
                     <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url_for('reservation._list')}}">예약확인</a>
                     </li>
