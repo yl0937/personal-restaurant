@@ -40,10 +40,20 @@
                     <a>{{ restaurant.type.name }}</a>
                 </td>
                 <td>
-                    {% if not g.user %}
+                    {% if like_list==0 %}
+                        <input type="button" value="팝업창 호출" onclick="showPopup();">
                     {% else %}
-                    <a href="{{ url_for('restaurant.detail',restaurant_id=restaurant.id)}}"><button button class="btn btn-primary" type="button">예약하기</button></a>
-                    <a href="{{ url_for('restaurant.detail',restaurant_id=restaurant.id)}}"><button button class="btn btn-primary" type="button">찜</button></a>
+                            {% if restaurant.restaurant in like_list %}
+                                <a href="{{ url_for('restaurant.detail',restaurant_id=restaurant.id)}}"><button button class="btn btn-outline-danger" type="button">예약하기</button></a>
+                                <a href="javascript:void(0)" class="dliked"
+                                data-uri="{{ url_for('restaurant.delete_like',restaurant_id=restaurant.id) }}"><img src="/static/img/like.png" width="30" height="30"></a>
+                                <input type="button" value="팝업창 호출" onclick="showPopup();">
+                            {% else %}
+                                <a href="{{ url_for('restaurant.detail',restaurant_id=restaurant.id)}}"><button button class="btn btn-outline-danger" type="button">예약하기</button></a>
+                                <a href="javascript:void(0)" class="liked"
+                                data-uri="{{ url_for('restaurant.like',restaurant_id=restaurant.id) }}"><img src="/static/img/unlike.png" width="30" height="30"></a>
+                                <input type="button" value="팝업창 호출" onclick="showPopup();">
+                        {% endif %}
                     {% endif %}
                 </td>
             </tr>
@@ -113,6 +123,24 @@ const btn_search = document.getElementById("btn_search");
 btn_search.addEventListener('click', function() {
     document.getElementById('kw').value = document.getElementById('search_kw').value;
     document.getElementById('searchForm').submit();
+});
+
+const liked_elements = document.getElementsByClassName("liked");
+Array.from(liked_elements).forEach(function(element) {
+    element.addEventListener('click', function() {
+        if(confirm("찜 리스트에 추가되었습니다.")) {
+            location.href = this.dataset.uri;
+        };
+    });
+});
+
+const delete_liked_elements = document.getElementsByClassName("dliked");
+Array.from(delete_liked_elements).forEach(function(element) {
+    element.addEventListener('click', function() {
+        if(confirm("찜 리스트에서 삭제되었습니다.")) {
+            location.href = this.dataset.uri;
+        };
+    });
 });
 </script>
 {% endblock %}

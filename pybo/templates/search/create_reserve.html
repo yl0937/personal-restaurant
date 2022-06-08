@@ -21,11 +21,17 @@
         </div>
         <div class="form-group">
             <label for="peoplenum">예약인원</label>
-            <input type="number" name="peoplenum" min="1" id="peoplenum" value="{{ form.peoplenum.data or '' }}">
+            <input type="number" name="peoplenum" min="1" id="peoplenum">
             <label for="create_date">예약시간</label>
-            <input type="datetime-local" name="create_date" id="create_date" value="{{ form.create_date.data or '' }}">
+            <input type="datetime-local" format='yyyy-MM-DD HH:mm:ss' class="form-control datetimepicker-input" id="search_end_input" name="search_end_input" data-target="#search_end_time"/>
         </div>
         <button type="submit" class="btn btn-primary">생성하기</button>
     </form>
 </div>
+<script>
+        $(function () {
+        end_time = $('#search_end_input').val();
+        $('#search_end_time').datetimepicker({ icons: { time: 'far fa-clock' }, format: 'yyyy-MM-DD HH:mm:ss' });
+    });
+</script>
 {% endblock %}

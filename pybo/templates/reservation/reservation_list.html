@@ -3,27 +3,26 @@
     <div class="container my-5">
         <table class="table my-5">
             <thead>
-<!--            다람: 검색창 안만들고 그냥 최근 예약식당 순, 인원수 순, 예약시간 순 으로 선택해서 정렬 할 수 있게 하는고 오때?-->
-<!--                <tr>-->
-<!--                <div class="input-group">-->
-<!--                    <input type="text" id="search_kw" class="form-control" value="{{ kw or '' }}" placeholder="식당,태그,종류 등을 검색하세요!">-->
-<!--                    <div class="input-group-append">-->
-<!--                        <button class="btn btn btn-primary" type="button" id="btn_search" href="#">찾기</button>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                </tr>-->
                 <tr class="thead-dark text-center">
+                    <th>레스토랑 사진</th>
                     <th>레스토랑</th>
                     <th>예약자</th>
                     <th>인원수</th>
                     <th>전화번호</th>
                     <th>시간</th>
+                    <th><select name="select" id="select">
+                            <option selected value="date" data-uri="{{ url_for('reservation._list')}}">예약일순</option>
+                            <option value="time" data-uri="{{ url_for('reservation.time_list')}}">예약시간순</option>
+                    </select><th>
                 </tr>
             </thead>
             <tbody>
             {% if restaurant_list %}
             {% for restaurant in restaurant_list.items %}
             <tr>
+                <td>
+                    <a>{{ restaurant.restaurant_img }}</a>
+                </td>
                 <td>
                     <a>{{ restaurant.restaurant.restaurant }}</a>
                 </td>
@@ -40,7 +39,8 @@
                     <a>{{ restaurant.create_date }}</a>
                 </td>
                 <td>
-                    <a><button button class="btn btn-primary" type="button">예약 취소</button></a>
+                    <a href="javascript:void(0)" class="delete btn btn-sm btn-outline-secondary"
+                    data-uri="{{ url_for('reservation.delete', reservation_id=restaurant.id) }}">예약취소</a>
                 </td>
             </tr>
             {% endfor %}
@@ -110,8 +110,29 @@
         document.getElementById('kw').value = document.getElementById('search_kw').value;
         document.getElementById('searchForm').submit();
     });
+
+    const delete_elements = document.getElementsByClassName("delete");
+    Array.from(delete_elements).forEach(function(element) {
+        element.addEventListener('click', function() {
+            if(confirm("정말로 삭제하시겠습니까?")) {
+                location.href = this.dataset.uri;
+            };
+        });
+    });
+
+    const select_elements = document.getElementsById("select");
+Array.from(select_elements).forEach(function(element) {
+    element.addEventListener('click', function() {
+        location.href = this.dataset.uri;
+    });
+});
     </script>
-    {% endblock %}
+<style>
+    select{
+    font-size: .9rem; padding: 2px 5px;
+    }
+</style>
+{% endblock %}
 
 
 

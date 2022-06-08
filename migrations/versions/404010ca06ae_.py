@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 4821bab31326
+Revision ID: 404010ca06ae
 Revises: 
-Create Date: 2022-05-31 23:11:50.506235
+Create Date: 2022-06-08 10:32:22.361031
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '4821bab31326'
+revision = '404010ca06ae'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -52,11 +52,14 @@ def upgrade():
     )
     op.create_table('liked',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('restaurant_name', sa.Integer(), nullable=False),
+    sa.Column('restaurant_name', sa.String(length=30), nullable=False),
+    sa.Column('address', sa.String(length=50), nullable=False),
+    sa.Column('tag_name', sa.String(length=30), nullable=False),
+    sa.Column('type_name', sa.String(length=30), nullable=False),
     sa.Column('user_name', sa.Integer(), nullable=False),
     sa.Column('create_date', sa.DateTime(), nullable=False),
     sa.ForeignKeyConstraint(['restaurant_name'], ['restaurant.restaurant'], ondelete='CASCADE'),
-    sa.ForeignKeyConstraint(['user_name'], ['user.userid'], ondelete='CASCADE'),
+    sa.ForeignKeyConstraint(['user_name'], ['user.username'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('reservation',
