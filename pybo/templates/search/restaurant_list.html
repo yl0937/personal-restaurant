@@ -41,23 +41,19 @@
                 </td>
                 <td>
                     {% if like_list==0 %}
-                    {% else %}
-<<<<<<< HEAD
-                        <a href="{{ url_for('restaurant.detail',restaurant_id=restaurant.id)}}"><button button class="btn btn-primary" type="button">예약하기</button></a>
-                        <a href="javascript:void(0)" class="liked btn btn-primary"
-                        data-uri="{{ url_for('restaurant.like',restaurant_id=restaurant.id) }}">찜</a>
                         <input type="button" value="팝업창 호출" onclick="showPopup();">
-=======
+                    {% else %}
                             {% if restaurant.restaurant in like_list %}
                                 <a href="{{ url_for('restaurant.detail',restaurant_id=restaurant.id)}}"><button button class="btn btn-outline-danger" type="button">예약하기</button></a>
                                 <a href="javascript:void(0)" class="dliked"
                                 data-uri="{{ url_for('restaurant.delete_like',restaurant_id=restaurant.id) }}"><img src="/static/img/like.png" width="30" height="30"></a>
+                                <input type="button" value="팝업창 호출" onclick="showPopup();">
                             {% else %}
                                 <a href="{{ url_for('restaurant.detail',restaurant_id=restaurant.id)}}"><button button class="btn btn-outline-danger" type="button">예약하기</button></a>
                                 <a href="javascript:void(0)" class="liked"
                                 data-uri="{{ url_for('restaurant.like',restaurant_id=restaurant.id) }}"><img src="/static/img/unlike.png" width="30" height="30"></a>
-                            {% endif %}
->>>>>>> master2
+                                <input type="button" value="팝업창 호출" onclick="showPopup();">
+                        {% endif %}
                     {% endif %}
                 </td>
             </tr>
