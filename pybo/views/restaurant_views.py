@@ -35,15 +35,20 @@ def detail(restaurant_id):
     form = ReservationForm()
     restaurant = Restaurant.query.get_or_404(restaurant_id)
     if request.method == 'POST' and form.validate_on_submit():
+        create_date = request.form['search_end_input']
+        date = create_date[0:10]
+        time = create_date[11:16]
+        create_date = (date + " " + time)
+        create_date = str(create_date)
+        create_date =  datetime.strptime(create_date, '%Y-%m-%d %H:%M')
         user = g.user.userid
-        # user = User.query.filter_by(userid=form.userid.data).first()
         if not user:
             flash('존재하지 않는 사용자 입니다.')
         else:
             reserve = Reservation(restaurant_id=restaurant_id,
                                   user_name=user,
                                   user_num = form.usernum.data,
-                                  create_date = form.create_date.data,
+                                  create_date = create_date,
                                   peoplenum = form.peoplenum.data)
             db.session.add(reserve)
             db.session.commit()
