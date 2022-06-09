@@ -42,6 +42,7 @@ def _list():
 def _popup():
     popup = Restaurant.query.order_by(Restaurant.id.desc())
     kw = request.args.get('kw', type=str, default='')
+    restaurant_list = Restaurant.query.order_by(Restaurant.id.desc())
     if kw:
         search = '%%{}%%'.format(kw)
         search_list1 = Restaurant.query.filter(Restaurant.restaurant.ilike(search)).distinct()
@@ -49,7 +50,7 @@ def _popup():
         search_list3 = Restaurant.query.join(Type).filter(Type.name.ilike(search)).distinct()
         search_list4 = Restaurant.query.filter(Restaurant.address.ilike(search)).distinct()
         popup = search_list1.union_all(search_list2).union_all(search_list3).union_all(search_list4).order_by(Restaurant.id.desc())
-    return render_template('search/popup.html', popup=popup, kw=kw)
+    return render_template('search/popup.html', restaurant_list=restaurant_list , popup=popup, kw=kw)
 
 @bp.route('/create/<int:restaurant_id>/', methods=('GET', 'POST'))
 @login_required
