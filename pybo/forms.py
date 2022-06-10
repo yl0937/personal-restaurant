@@ -24,3 +24,4 @@ class ReservationForm(FlaskForm):
         DataRequired(), Length(min=3,max=25)])
     peoplenum = IntegerField('예약인원',validators=[
         DataRequired()])
+

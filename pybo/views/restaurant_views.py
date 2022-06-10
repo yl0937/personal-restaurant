@@ -38,19 +38,16 @@ def _list():
             like_list.append(like.restaurant_name)
     return render_template('search/restaurant_list.html', restaurant_list=restaurant_list,page=page,kw=kw,like_list=like_list)
 
-@bp.route('/popup/')
-def _popup():
-    popup = Restaurant.query.order_by(Restaurant.id.desc())
-    kw = request.args.get('kw', type=str, default='')
-    restaurant_list = Restaurant.query.order_by(Restaurant.id.desc())
-    if kw:
-        search = '%%{}%%'.format(kw)
-        search_list1 = Restaurant.query.filter(Restaurant.restaurant.ilike(search)).distinct()
-        search_list2 = Restaurant.query.join(Tag).filter(Tag.name.ilike(search)).distinct()
-        search_list3 = Restaurant.query.join(Type).filter(Type.name.ilike(search)).distinct()
-        search_list4 = Restaurant.query.filter(Restaurant.address.ilike(search)).distinct()
-        popup = search_list1.union_all(search_list2).union_all(search_list3).union_all(search_list4).order_by(Restaurant.id.desc())
-    return render_template('search/popup.html', restaurant_list=restaurant_list , popup=popup, kw=kw)
+@bp.route('/popup/<int:restaurant_id>/', methods=('GET', 'POST'))
+def _popup(restaurant_id):
+    form = ReservationForm()
+    restaurant = Restaurant.query.get_or_404(restaurant_id)
+    if request.method == 'POST' and form.validate_on_submit():
+        reserve = Reservation(restaurant_id=restaurant_id)
+        db.session.add(reserve)
+        db.session.commit()
+        return redirect(url_for('main.index'))
+    return render_template('search/popup.html',restaurant=restaurant)
 
 @bp.route('/create/<int:restaurant_id>/', methods=('GET', 'POST'))
 @login_required
