@@ -52,15 +52,13 @@
                                 <a href="{{ url_for('restaurant.detail',restaurant_id=restaurant.id)}}"><button button class="btn btn-outline-danger" type="button">예약하기</button></a>
                                 <a href="javascript:void(0)" class="dliked"
                                 data-uri="{{ url_for('restaurant.delete_like',restaurant_id=restaurant.id) }}"><img src="/static/img/like.png" width="30" height="30"></a>
-
                             {% else %}
                                 <a href="{{ url_for('restaurant.detail',restaurant_id=restaurant.id)}}"><button button class="btn btn-outline-danger" type="button">예약하기</button></a>
                                 <a href="javascript:void(0)" class="liked"
                                 data-uri="{{ url_for('restaurant.like',restaurant_id=restaurant.id) }}"><img src="/static/img/unlike.png" width="30" height="30"></a>
-
                         {% endif %}
                     {% endif %}
-<!--                    a태그, url for, <a href="{{ url_for('restaurant.detail',restaurant_id=restaurant.id)}}"> -->
+<!--                    a태그, url for, <a href="{{ url_for('restaurant.detail',restaurant_id=restaurant.id)}}">-->
                    <input type="button" value="팝업창 호출3" onclick="showPopup();">
                     <script>
                         function showPopup() {
@@ -82,7 +80,7 @@
         <!-- 이전페이지 -->
         {% if restaurant_list.has_prev %}
         <li class="page-item">
-            <a class="page-link" href="?page={{ restaurant_list.prev_num }}">이전</a>
+            <a class="page-link" href="?page={{ restaurant_list.prev_num }}" style="background-color: rgb(255,0,85); border: 0;">이전</a>
         </li>
         {% else %}
         <li class="page-item disabled">
@@ -97,7 +95,7 @@
         </li>
         {% else %}
         <li class="page-item active" aria-current="page">
-            <a class="page-link" href="#">{{ page_num }}</a>
+            <a class="page-link" href="#" style="background-color: rgb(255,0,85); border: 0;">{{ page_num }}</a>
         </li>
         {% endif %}
         {% else %}
@@ -109,11 +107,11 @@
         <!-- 다음페이지 -->
         {% if restaurant_list.has_next %}
         <li class="page-item">
-            <a class="page-link" href="?page={{ restaurant_list.next_num }}">다음</a>
+            <a class="page-link" href="?page={{ restaurant_list.next_num }}" style="background-color: rgb(255,0,85); border: 0;">다음</a>
         </li>
         {% else %}
         <li class="page-item disabled">
-            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="#" >다음</a>
         </li>
         {% endif %}
     </ul>

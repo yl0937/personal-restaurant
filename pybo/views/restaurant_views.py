@@ -4,8 +4,6 @@ from pybo.models import User,Reservation, Liked
 from pybo.forms import ReservationForm
 from datetime import datetime
 from pybo.views.auth_views import login_required
-
-
 from pybo.models import Restaurant, Tag, Type
 
 bp = Blueprint('restaurant',__name__,url_prefix='/restaurant')
@@ -38,15 +36,11 @@ def _list():
             like_list.append(like.restaurant_name)
     return render_template('search/restaurant_list.html', restaurant_list=restaurant_list,page=page,kw=kw,like_list=like_list)
 
-@bp.route('/popup/<int:restaurant_id>/', methods=('GET', 'POST'))
+@bp.route('/popup/<int:restaurant_id>/')
 def _popup(restaurant_id):
     form = ReservationForm()
     restaurant = Restaurant.query.get_or_404(restaurant_id)
-    if request.method == 'POST' and form.validate_on_submit():
-        reserve = Reservation(restaurant_id=restaurant_id)
-        db.session.add(reserve)
-        db.session.commit()
-        return redirect(url_for('main.index'))
+
     return render_template('search/popup.html',restaurant=restaurant)
 
 @bp.route('/create/<int:restaurant_id>/', methods=('GET', 'POST'))
