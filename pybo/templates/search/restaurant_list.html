@@ -117,9 +117,6 @@
     <!-- 페이징처리 끝 -->
     </div>
 </div>
-<form id="searchForm" method="get" action="{{ url_for('restaurant._list') }}">
-    <input type="hidden" id="kw" name="kw" value="{{ kw or '' }}">
-</form>
 <script type='text/javascript'>
 const page_elements = document.getElementsByClassName("page-link");
 Array.from(page_elements).forEach(function(element) {
