@@ -60,7 +60,7 @@
                     {% endif %}
 <!--                    a태그, url for, <a href="{{ url_for('restaurant.detail',restaurant_id=restaurant.id)}}">-->
                    <input type="button" value="팝업창 호출3" onclick="showPopup();">
-                    <script>
+                    <script type="text/javascript">
                         function showPopup() {
                             window.open("{{ url_for('restaurant._popup', restaurant_id=restaurant.id) }}","a","width=600, height=600, left=100, top=50");
                         }
