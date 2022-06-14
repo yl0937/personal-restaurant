@@ -49,3 +49,9 @@ class Liked(db.Model):
     user_name = db.Column(db.Integer, db.ForeignKey(
         'user.username', ondelete='CASCADE'), nullable=False)
     create_date = db.Column(db.DateTime(), nullable=False)
+
+class Poped(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    restaurant_id = db.Column(db.Integer, db.ForeignKey(
+        'restaurant.id', ondelete='CASCADE'), nullable=False)
+    detail_restaurant = db.Column(db.String(100), nullable=False)

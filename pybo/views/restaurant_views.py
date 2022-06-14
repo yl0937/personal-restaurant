@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template,request,redirect,url_for,flash, g,session
 from pybo import db
-from pybo.models import User,Reservation, Liked
+from pybo.models import User,Reservation, Liked, Poped
 from pybo.forms import ReservationForm
 from datetime import datetime
 from pybo.views.auth_views import login_required
@@ -38,10 +38,10 @@ def _list():
 
 @bp.route('/popup/<int:restaurant_id>/')
 def _popup(restaurant_id):
-    form = ReservationForm()
     restaurant = Restaurant.query.get_or_404(restaurant_id)
+    poped = Reservation(restaurant_id=restaurant_id)
 
-    return render_template('search/popup.html',restaurant=restaurant)
+    return render_template('search/popup.html',restaurant=restaurant,poped=poped)
 
 @bp.route('/create/<int:restaurant_id>/', methods=('GET', 'POST'))
 @login_required
@@ -54,7 +54,7 @@ def detail(restaurant_id):
         time = create_date[11:16]
         create_date = (date + " " + time)
         create_date = str(create_date)
-        create_date =  datetime.strptime(create_date, '%Y-%m-%d %H:%M')
+        create_date = datetime.strptime(create_date, '%Y-%m-%d %H:%M')
         user = g.user.userid
         if not user:
             flash('존재하지 않는 사용자 입니다.')
