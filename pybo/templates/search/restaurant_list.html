@@ -125,10 +125,14 @@ Array.from(page_elements).forEach(function(element) {
         document.getElementById('searchForm').submit();
     });
 });
-const btn_search = document.getElementById("btn_search");
-btn_search.addEventListener('click', function() {
-    document.getElementById('kw').value = document.getElementById('search_kw').value;
-    document.getElementById('searchForm').submit();
+const input = document.getElementById("kw");
+input.addEventListener('keyup', function(event) {
+      if (event.keyCode === 13) {
+        event.preventDefault();
+        document.getElementById('kw').value = document.getElementById('kw').value;
+        document.getElementById('searchForm').submit();
+      }
+
 });
 
 const liked_elements = document.getElementsByClassName("liked");
