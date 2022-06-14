@@ -24,8 +24,6 @@
                 </tr>
             </thead>
             <tbody>
-            에토미 혹시 최근에 restaurant_views에 list 만진적 있으면 한 번 확인해볼래? 검색창에 키워드로 검색이 안돼여 ex. 레스토랑1 검색하면 다 나옴 <br>
-            에토미 혹시 최근에 restaurant_views에 list 만진적 있으면 한 번 확인해볼래? 검색창에 키워드로 검색이 안돼여 ex. 레스토랑1 검색하면 다 나옴
 
             {% if restaurant_list %}
             {% for restaurant in restaurant_list.items %}
@@ -52,31 +50,20 @@
                                 <a href="{{ url_for('restaurant.detail',restaurant_id=restaurant.id)}}"><button button class="btn btn-outline-danger" type="button">예약하기</button></a>
                                 <a href="javascript:void(0)" class="dliked"
                                 data-uri="{{ url_for('restaurant.delete_like',restaurant_id=restaurant.id) }}"><img src="/static/img/like.png" width="30" height="30"></a>
-                                <input type="button" value="팝업창 호출3" onclick="showPopup();">
-                                <script type="text/javascript">
-                                    function showPopup() {
-                                        window.open("{{ url_for('restaurant._popup', restaurant_id=restaurant.id) }}","a","width=600, height=600, left=100, top=50");
-                                    }
-                                </script>
                             {% else %}
                                 <a href="{{ url_for('restaurant.detail',restaurant_id=restaurant.id)}}"><button button class="btn btn-outline-danger" type="button">예약하기</button></a>
                                 <a href="javascript:void(0)" class="liked"
                                 data-uri="{{ url_for('restaurant.like',restaurant_id=restaurant.id) }}"><img src="/static/img/unlike.png" width="30" height="30"></a>
-                                <input type="button" value="팝업창 호출3" onclick="showPopup();">
-                                <script type="text/javascript">
-                                    function showPopup() {
-                                        window.open("{{ url_for('restaurant._popup', restaurant_id=restaurant.id) }}","a","width=600, height=600, left=100, top=50");
-                                    }
-                                </script>
                         {% endif %}
                     {% endif %}
 <!--                    a태그, url for, <a href="{{ url_for('restaurant.detail',restaurant_id=restaurant.id)}}">-->
-<!--                   <input type="button" value="팝업창 호출3" onclick="showPopup();">-->
-<!--                    <script type="text/javascript">-->
-<!--                        function showPopup() {-->
-<!--                            window.open("{{ url_for('restaurant._popup', restaurant_id=restaurant.id) }}","a","width=600, height=600, left=100, top=50");-->
-<!--                        }-->
-<!--                    </script>-->
+<!--                        <a href="{{ url_for('restaurant._popup', restaurant_id=restaurant.id) }}"><input type="button" value="팝업창 호출3" onclick="showPopup();"></a>-->
+                    <input type="button" value="팝업창 호출3" onclick="showPopup();">
+                    <script type="text/javascript">
+                        function showPopup() {
+                            window.open("{{ url_for('restaurant._popup', restaurant_id=restaurant.id) }}","a","width=600, height=600, left=100, top=50");
+                        }
+                    </script>
                 </td>
             </tr>
             {% endfor %}

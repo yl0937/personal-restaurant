@@ -13,7 +13,7 @@
           <div class="carousel-caption d-none d-md-block text-start">
             <h1 style="font-family: 'Kdam Thmor Pro', sans-serif;">For Pet owners</h1></br>
             <p>반려동물과 함께하기 원하는 당신을 위해, 모아두었어요</p>
-            <p><a class="btn btn-lg btn-primary" href="#" style="background:#f7323f; border:0" >확인하기</a></p>
+            <p><a class="btn btn-lg btn-primary" href="{{ url_for('restaurant._for_petowners') }}" style="background:#f7323f; border:0" onclick="click_petowners()" >확인하기</a></p>
           </div>
         </div>
         <div class="carousel-item">
@@ -21,7 +21,7 @@
           <div class="carousel-caption d-none d-md-block text-end">
             <h1 style="font-family: 'Kdam Thmor Pro', sans-serif;">For Vegetarians</h1></br>
             <p>비건식당을 원하는 당신을 위해, 모아두었어요</p>
-            <p><a class="btn btn-lg btn-primary" href="#" style="background:#f7323f;border:0">확인하기</a></p>
+            <p><a class="btn btn-lg btn-primary" href="{{ url_for('restaurant._for_veges') }}" style="background:#f7323f;border:0">확인하기</a></p>
           </div>
         </div>
         <div class="carousel-item">
@@ -29,7 +29,7 @@
           <div class="carousel-caption d-none d-md-block text-start">
             <h1 style="font-family: 'Kdam Thmor Pro', sans-serif;">For Quiet Time</h1></br>
             <p>한적한 식당을 원하는 당신을 위해, 모아두었어요</p>
-            <p><a class="btn btn-lg btn-primary" href="#" style="background:#f7323f;border:0">확인하기</a></p>
+            <p><a class="btn btn-lg btn-primary" href="{{ url_for('restaurant._for_adults') }}" style="background:#f7323f;border:0">확인하기</a></p>
           </div>
         </div>
       </div>
@@ -53,11 +53,11 @@
             <div class="col-md-6">
               <div class="row g-0 border rounded overflow-hidden flex-md-row shadow-sm h-md-250 position-relative" style="border-color=#f7323f">
                 <div class="col p-4 d-flex flex-column position-static">
-                  <strong class="d-inline-block text-primary">TOP 10</strong>
-                  <h3 class="mb-1">돈가스 맛집 TOP 10</h3>
+                  <strong class="d-inline-block text-primary">TOP 9</strong>
+                  <h3 class="mb-1">돈가스 맛집 TOP 9</h3>
                   <div class="mb-1 text-muted">in Seoul</div>
                   <p class="card-text mb-auto">스윙스도 먹고 반한 돈가스 맛집, 소개팅 성공 확률 UP!!</p>
-                  <a href="#" class="stretched-link">더 알아보기</a>
+                  <a href="{{ url_for('restaurant.cutlet') }}" class="stretched-link">더 알아보기</a>
                 </div>
                 <div class="col-auto d-none d-lg-block">
                   <img src="/static/img/cutlet.jpg" class="d-block" width="200" height= "200" alt="...">
@@ -71,7 +71,7 @@
                   <h3 class="mb-0">후기 BEST5 둘러보기</h3>
                   <div class="mb-1 text-muted">in Seoul ..etc</div>
                   <p class="mb-auto">부모님이나 친구 데리고 가기 딱 좋은 후기 맛집 BEST5</p>
-                  <a href="#" class="stretched-link">더 알아보기</a>
+                  <a href="{{ url_for('restaurant.review') }}" class="stretched-link">더 알아보기</a>
                 </div>
                 <div class="col-auto d-none d-lg-block">
                   <img src="/static/img/pet4.jpg" class="d-block" width="200" height= "200" alt="...">
@@ -81,14 +81,19 @@
         </div>
       </div>
   </main>
-    <footer class="footer" style="position: absolute; bottom: 0; width: 100%; height: 60px; line-height: 60px; background-color: #f7323f;">
-      <div class="container">
-        <a href="#" style="text-decoration:none"><span class="text-center" style="color:#fff">제휴문의 | </span></a>
-        <a href="#" style="text-decoration:none"><span class="text-center" style="color:#fff">이용약관 | </span></a>
-        <a href="#" style="text-decoration:none"><span class="text-center" style="color:#fff">개인정보처리방침 | </span></a>
-        <a href="#" style="text-decoration:none"><span class="text-center" style="color:#fff">공지사항</span></a><br>
-        굿디자인웹(GDWEB) | contact@gdweb.co.kr | TEL.02-6384-6000 | 등록번호 263-16-01300<br>
-        GDWEB All rights reserved
-      </div>
-    </footer>
+  <footer class="footer" style="position: absolute; bottom: 0; width: 100%; height: 60px; line-height: 60px; background-color: #f7323f;">
+    <div class="container">
+      <a href="#" style="text-decoration:none"><span class="text-center" style="color:#fff">제휴문의 | </span></a>
+      <a href="#" style="text-decoration:none"><span class="text-center" style="color:#fff">이용약관 | </span></a>
+      <a href="#" style="text-decoration:none"><span class="text-center" style="color:#fff">개인정보처리방침 | </span></a>
+      <a href="#" style="text-decoration:none"><span class="text-center" style="color:#fff">공지사항</span></a><br>
+    </div>
+  </footer>
+
+  <script type="text/javascript">
+  function click_petowners() {
+    alert("aaaaaaa");
+  }
+
+  </script>
 {% endblock %}

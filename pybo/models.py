@@ -52,6 +52,7 @@ class Liked(db.Model):
 
 class Poped(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    restaurant = db.Column(db.String(30), nullable=False)
     restaurant_id = db.Column(db.Integer, db.ForeignKey(
         'restaurant.id', ondelete='CASCADE'), nullable=False)
     detail_restaurant = db.Column(db.String(100), nullable=False)
