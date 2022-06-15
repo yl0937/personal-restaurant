@@ -113,6 +113,7 @@ def _for_adults():
 
 @bp.route('/popup/<int:restaurant_id>/', methods=('GET', 'POST'))
 def _popup(restaurant_id):
+
     restaurant = Restaurant.query.get_or_404(restaurant_id)
     poped = Poped(restaurant_id=restaurant_id)
     restaurant_list = Restaurant.query.order_by(Restaurant.id.desc())
