@@ -4,9 +4,10 @@ from pybo.models import User,Reservation, Liked
 from pybo.forms import ReservationForm
 from datetime import datetime
 from pybo.views.auth_views import login_required
+from sqlalchemy import desc, asc
 
 
-from pybo.models import Restaurant, Tag, Type
+from pybo.models import Restaurant, Tag, Type, Reservation
 
 bp = Blueprint('reservation',__name__,url_prefix='/reservation')
 
@@ -14,21 +15,15 @@ bp = Blueprint('reservation',__name__,url_prefix='/reservation')
 @login_required
 def _list():
     user = g.user.userid
-    type = "date"
-    print(type)
+    type = request.args.get('type', type=int, default='')
     page = request.args.get('page', type=int, default=1)  # 페이지
     restaurant_list = Reservation.query.filter(Reservation.user_name.ilike(user))
-    restaurant_list = restaurant_list.paginate(page, per_page=10)
-    return render_template('reservation/reservation_list.html', restaurant_list=restaurant_list,page=page)
-
-@bp.route('/list/time/')
-@login_required
-def time_list():
-    user = g.user.userid
-    type = "time"
-    print(type)
-    page = request.args.get('page', type=int, default=1)  # 페이지
-    restaurant_list = Reservation.query.filter(Reservation.user_name.ilike(user))
+    if(type==1):
+        restaurant_list = Reservation.query.filter(Reservation.user_name.ilike(user)).order_by(Reservation.id.desc())
+    elif(type==2):
+        restaurant_list = Reservation.query.filter(Reservation.user_name.ilike(user)).order_by(Reservation.peoplenum.desc())
+    elif(type==3):
+        restaurant_list = Reservation.query.filter(Reservation.user_name.ilike(user)).order_by(asc(Reservation.create_date))
     restaurant_list = restaurant_list.paginate(page, per_page=10)
     return render_template('reservation/reservation_list.html', restaurant_list=restaurant_list,page=page)
 

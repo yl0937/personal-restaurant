@@ -10,10 +10,28 @@
                     <th>인원수</th>
                     <th>전화번호</th>
                     <th>시간</th>
-                    <th><select name="select" id="select">
-                            <option selected value="date" data-uri="{{ url_for('reservation._list')}}">예약일순</option>
-                            <option value="time" data-uri="{{ url_for('reservation.time_list')}}">예약시간순</option>
-                    </select><th>
+                    <th>
+                        <select name="type" id="type" onchange="showValue(this)">
+                            <option value='' selected>-- 선택 --</option>
+                            <option value="recent">최근예약</option>
+                            <option value="peoplenum">예약인원</option>
+                            <option value="time">예약시간</option>
+                        </select>
+                    <th>
+                    <script>
+                            const showValue = (target) => {
+                                const type = target.value;
+                                    if(type=="recent") {
+                                    location.href = "{{ url_for('reservation._list',type=1) }}";
+                                    };
+                                if(type=="peoplenum"){
+                                location.href = "{{ url_for('reservation._list',type=2) }}";
+                                };
+                                if(type=="time"){
+                                location.href = "{{ url_for('reservation._list',type=3) }}";
+                                };
+                            }
+                    </script>
                 </tr>
             </thead>
             <tbody>
@@ -102,12 +120,6 @@
             document.getElementById('searchForm').submit();
         });
     });
-    const btn_search = document.getElementById("btn_search");
-    btn_search.addEventListener('click', function() {
-        document.getElementById('kw').value = document.getElementById('search_kw').value;
-        document.getElementById('searchForm').submit();
-    });
-
     const delete_elements = document.getElementsByClassName("delete");
     Array.from(delete_elements).forEach(function(element) {
         element.addEventListener('click', function() {
@@ -117,12 +129,15 @@
         });
     });
 
-    const select_elements = document.getElementsById("select");
-Array.from(select_elements).forEach(function(element) {
-    element.addEventListener('click', function() {
-        location.href = this.dataset.uri;
-    });
+    const input = document.getElementById("kw");
+    input.addEventListener('keyup', function(event) {
+      if (event.keyCode === 13) {
+        event.preventDefault();
+        document.getElementById('kw').value = document.getElementById('kw').value;
+        document.getElementById('searchForm').submit();
+      }
 });
+
     </script>
 <style>
     select{
@@ -130,6 +145,3 @@ Array.from(select_elements).forEach(function(element) {
     }
 </style>
 {% endblock %}
-
-
-
