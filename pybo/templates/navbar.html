@@ -12,7 +12,7 @@
                 </ul>
             </div>
                     <form class="input-group" style="width: 50%; " id="searchForm" method="get" action="{{ url_for('restaurant._list') }}">
-                    <input id="kw" name="kw" type="text"  class="form-control" value="{{ kw or '' }}" placeholder="식당, 태그, 종류 등을 검색하세요!"
+                    <input id="kw" name="kw" type="text"  class="form-control" value="{{ kw or '' }}" placeholder="원하는 식당을 검색하세요!"
                     onkeypress="show_name(event)" style="border-radius:10px;">
                     </form>
             <button class="navbar-toggler" type="button"
